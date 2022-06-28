@@ -321,7 +321,7 @@
             // 
             // Column2
             // 
-            this.Column2.HeaderText = "Thread Count";
+            this.Column2.HeaderText = "Threat Count";
             this.Column2.Name = "Column2";
             // 
             // Column3

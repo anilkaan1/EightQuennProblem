@@ -79,7 +79,7 @@ namespace SatrançProje
         public void konumu_coz(int[] Konum)
         {
             watch.Start();
-            int[] Thread_count_list = new int[8];
+            int[] Threat_count_list = new int[8];
             int cakisma_sayisi = 0;
             int index = 0;
             int baslangic_cakisma_sayisi = 99;
@@ -115,10 +115,10 @@ namespace SatrançProje
                                 }
 
                             }
-                            Thread_count_list[j] = cakisma_sayisi;
+                            Threat_count_list[j] = cakisma_sayisi;
                             cakisma_sayisi = 0;
                         }
-                        int[] v = Thread_count_list.Select((b, k) => b == Thread_count_list.Min() ? k : -1).Where(k => k != -1).ToArray();
+                        int[] v = Threat_count_list.Select((b, k) => b == Threat_count_list.Min() ? k : -1).Where(k => k != -1).ToArray();
                         index = v[(random.Next(0, v.Length))];
                     if (index != Konum[i])
                     {
@@ -194,20 +194,20 @@ namespace SatrançProje
             pictureBoxList.Add(Vezir7);
             pictureBoxList.Add(Vezir8);
             //
-            //20 tablo oluşturulup listeye eklenir.
-            for(int i = 0; i < 20; i++)
+            //19 tablo oluşturulup listeye eklenir.
+            for(int i = 0; i < 19; i++)
             {
                 TableStates.Add(new int[8]);
             }
 
-            //Datagridview e 20 satır eklenir.
-            for (int m = 0; m < 20; m++)
+            //Datagridview e 19 satır eklenir.
+            for (int m = 0; m < 19; m++)
             {
                 dataGridView1.Rows.Add("Table " + (m + 1).ToString(), "");
             }
 
-            //20 tablonun vezir konumları oluşturulur.
-            for (int b = 0; b < 20; b++)
+            //19 tablonun vezir konumları oluşturulur.
+            for (int b = 0; b < 19; b++)
             {
                 random_restart(TableStates[b]);
             }
@@ -217,7 +217,7 @@ namespace SatrançProje
 
 
             //Ilk durumların cakisma sayilari hesaplanır.
-            for (int n = 0; n < 20; n++)
+            for (int n = 0; n < 19; n++)
             {
                 Cakisma_sayisi_hesapla_ve_yaz(TableStates[n]);
 
@@ -250,12 +250,12 @@ namespace SatrançProje
         private void button1_Click_1(object sender, EventArgs e)
         {
             
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 19; i++)
             {
                 random_restart(TableStates[i]);
             }
             Show_Table(TableStates[0]);
-            for (int d = 0; d < 20; d++)
+            for (int d = 0; d < 19; d++)
             {
                 Cakisma_sayisi_hesapla_ve_yaz(TableStates[d]);
             }
@@ -268,11 +268,11 @@ namespace SatrançProje
         //Bütün konumları çözen buton.
         private void button2_Click(object sender, EventArgs e)
         {
-            for(int m = 0; m < 20; m++)
+            for(int m = 0; m < 19; m++)
             {
                 konumu_coz(TableStates[m]);
             }
-            for(int n = 0; n < 20; n++)
+            for(int n = 0; n < 19; n++)
             {
                 Cakisma_sayisi_hesapla_ve_yaz(TableStates[n]);               
             }
@@ -286,22 +286,53 @@ namespace SatrançProje
         //Belirli bir tabloyu çözmeye yarayan buton.
         private void button4_Click(object sender, EventArgs e)
         {
-            konumu_coz(TableStates[Convert.ToInt32(textBox1.Text) - 1]);
-            Cakisma_sayisi_hesapla_ve_yaz(TableStates[Convert.ToInt32(textBox1.Text) - 1]);
-            Show_Table(TableStates[Convert.ToInt32(textBox1.Text) - 1]);
+            int table_no;
+            bool isNumber = int.TryParse(textBox1.Text, out table_no);
+
+            if (!String.IsNullOrEmpty(textBox1.Text) && isNumber)
+            {
+                table_no = Convert.ToInt32(textBox1.Text);
+                konumu_coz(TableStates[table_no-1]);
+                Cakisma_sayisi_hesapla_ve_yaz(TableStates[table_no-1]);
+                Show_Table(TableStates[table_no-1]);
+            }
+            else
+            {
+
+            }
             
         }
         //Belirli Bir tabloyu restart eden buton.
         private void button5_Click(object sender, EventArgs e)
         {
-            random_restart(TableStates[Convert.ToInt32(textBox1.Text) - 1]);
-            Cakisma_sayisi_hesapla_ve_yaz(TableStates[Convert.ToInt32(textBox1.Text) - 1]);
-            Show_Table(TableStates[Convert.ToInt32(textBox1.Text) - 1]);
+            int table_no;
+            bool isNumber = int.TryParse(textBox1.Text, out table_no);
+            if (!String.IsNullOrEmpty(textBox1.Text) && isNumber)
+            {
+                random_restart(TableStates[table_no-1]);
+                Cakisma_sayisi_hesapla_ve_yaz(TableStates[table_no-1]);
+                Show_Table(TableStates[table_no-1]);
+            }
+            else
+            {
+
+            }
+
         }
         //Belirli Bir tabloyu gösteren buton.
         private void button3_Click(object sender, EventArgs e)
         {
-            Show_Table(TableStates[Convert.ToInt32(textBox1.Text) - 1]);
+            int table_no;
+            bool isNumber = int.TryParse(textBox1.Text, out table_no);
+            if (!String.IsNullOrEmpty(textBox1.Text) && isNumber)
+            {
+                Show_Table(TableStates[table_no-1]);
+            }
+            else
+            {
+
+            }
+            
         }
 
 
